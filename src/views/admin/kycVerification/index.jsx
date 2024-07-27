@@ -9,12 +9,12 @@ const UserDetails = () => {
   const [kycDetails, setKYCDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [popupImage, setPopupImage] = useState(null);
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   // Fetch user emails on component mount
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await fetch('https://netfairsolution-backend-vpp-devloper.onrender.com/getUserEmails');
+        const response = await fetch(`${backendUrl}/getUserEmails`);
         const data = await response.json();
         setEmails(data.emails);
       } catch (error) {
@@ -30,7 +30,7 @@ const UserDetails = () => {
       if (selectedEmail) {
         try {
           setLoading(true);
-          const response = await fetch(`https://netfairsolution-backend-vpp-devloper.onrender.com/getKYCDetailsByEmail?email=${selectedEmail}`);
+          const response = await fetch(`${backendUrl}/getKYCDetailsByEmail?email=${selectedEmail}`);
           const data = await response.json();
           setKYCDetails(data.kycDetails);
           setLoading(false);
@@ -47,7 +47,7 @@ const UserDetails = () => {
   const handleVerify = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://netfairsolution-backend-vpp-devloper.onrender.com/verifyKYC', {
+      const response = await fetch(`${backendUrl}/verifyKYC`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
