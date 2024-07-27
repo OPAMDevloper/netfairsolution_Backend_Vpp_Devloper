@@ -5,7 +5,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,7 +17,7 @@ export default function SignIn() {
     console.log(payload);
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(`${backendUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

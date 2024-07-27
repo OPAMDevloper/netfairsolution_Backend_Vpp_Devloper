@@ -4,14 +4,14 @@ import axios from "axios";
 const GrievanceTracker = () => {
   const [openGrievances, setOpenGrievances] = useState([]);
   const [resolvedGrievances, setResolvedGrievances] = useState([]);
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   useEffect(() => {
     fetchGrievances();
   }, []);
 
   const fetchGrievances = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/grievances");
+      const response = await axios.get(`${backendUrl}/grievances`);
       const grievances = response.data;
       console.log("Hello");
       setOpenGrievances(grievances.filter((g) => !g.isRead));
@@ -24,7 +24,7 @@ const GrievanceTracker = () => {
   const handleResolve = async (grievance) => {
     try {
       await axios.put(
-        `http://localhost:5000/grievances/${grievance._id}/resolve`
+        `${backendUrl}/grievances/${grievance._id}/resolve`
       );
       fetchGrievances(); // Refresh the data
     } catch (error) {

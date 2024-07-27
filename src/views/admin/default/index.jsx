@@ -22,10 +22,10 @@ const Dashboard = () => {
   useEffect(() => {
     FetchData();
   }, []);
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const FetchData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/transactions", {
+      const response = await fetch(`${backendUrl}/transactions`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
