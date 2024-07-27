@@ -12,6 +12,7 @@ const User1 = require("./models/User1");
 const KYC = require("./models/Verification");
 const Grievance = require("./models/Feedback");
 const router = require("./routes/transectionRoutes");
+const Verification = require("./models/Verification");
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
@@ -88,6 +89,7 @@ app.get("/getKYCDetailsByEmail", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 app.post("/verifyKYC", async (req, res) => {
   const { email } = req.body;
   try {
